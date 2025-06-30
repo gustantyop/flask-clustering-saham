@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pilih Saham</title>
+</head>
+<body>
+    <h2>Pilih 3 dari 4 File Saham</h2>
+    <form method="post" action="/cluster">
+        {% for filename in filenames %}
+            <input type="checkbox" name="files" value="{{ filename }}"> {{ filename }}<br>
+        {% endfor %}
+        <br>
+        <input type="submit" value="Proses Clustering">
+    </form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hasil Clustering Saham</title>
+</head>
+<body>
+    <h2>Hasil Clustering</h2>
+    <img src="{{ url_for('static', filename='plot.png') }}" alt="Plot Clustering" width="600"><br><br>
+
+    <h3>Evaluasi Clustering</h3>
+    <p><b>Inertia:</b> {{ inertia }}</p>
+
+    <h3>Proporsi Ukuran Cluster</h3>
+    <table border="1" cellpadding="6">
+        <tr><th>Nama Cluster</th><th>Persentase</th></tr>
+        {% for cluster, percent in proportions.items() %}
+        <tr>
+            <td>{{ cluster }}</td>
+            <td>{{ percent }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Alokasi Saham per Cluster (%)</h3>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Cluster</th>
+            {% for saham in allocation.values()|first %}
+                <th>{{ saham }}</th>
+            {% endfor %}
+        </tr>
+        {% for cluster_name, saham_data in allocation.items() %}
+        <tr>
+            <td>{{ cluster_name }}</td>
+            {% for percent in saham_data.values() %}
+                <td>{{ percent }}%</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br><br>
+    <form action="/" method="get">
+        <button type="submit">🔄 Proses Ulang</button>
+    </form>
+</body>
+</html>
